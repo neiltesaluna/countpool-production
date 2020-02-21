@@ -1,0 +1,31 @@
+
+/* f5eaea - tan */
+/* 7fcd91 - green */
+/* 5b5656 - gray */
+/* 4d4646 - black */
+
+.navbar-nav > li{
+  padding-left: 0.1rem;
+  padding-right: 0.1rem;
+  cursor: pointer;
+}
+
+.jumbotron {
+  background-color: #fff;
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+.title-text {
+  font-size:10vw
+}
+
+.timer-text {
+  font-size:4vw
+}
+
+.modal-dialog {
+  max-width: 378px
+}

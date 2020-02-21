@@ -1,0 +1,82 @@
+<!-- Modal -->
+<div class="modal fade" id="local_newtimeModal" tabindex="-1" role="dialog" aria-labelledby="local_newtimeModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">New Timer</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <form id="form_localtimer" action="#">
+
+        <div class="form-group">
+          <label class="form-control-label">Timer</label>
+          <input id=local_title class="form-control form-control-lg" type="text" required>
+        </div>
+
+        <div id="form_localtimer" class="form-group">
+          <label class="form-control-label">Date</label>
+          <input id=local_date class="form-control form-control-lg" type="date" required>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
+          <input class="btn btn-primary" type="submit" value="New Timer">
+        </div>
+
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+
+var localTimers = JSON.parse(window.localStorage.getItem('localTimers')) || [];
+
+var local_titledata = document.getElementById("local_title");
+var local_datedata = document.getElementById("local_date");
+
+
+// creating a new timer on form completion
+document.getElementById("form_localtimer").onsubmit = function() {
+  submit_localtimer()
+};
+
+function submit_localtimer () {
+  var local_title = local_titledata.value;
+  var local_date = local_datedata.value;
+
+  if (local_title && local_date) {
+
+
+    var form_timer = {
+    "title": local_title,
+    "goal": local_date,
+    "id": "local_"+localTimers.length,
+    "image": "default-2.jpg",
+    "local_check" : "True",
+    }
+
+    append_timer(form_timer)
+
+  }
+  location.reload()
+
+};
+
+// appending a new timer
+
+function append_timer(new_timer) {
+
+
+  localTimers.push(new_timer);
+  localStorage.setItem('localTimers', JSON.stringify(localTimers));
+
+}
+
+</script>
