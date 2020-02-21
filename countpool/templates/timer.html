@@ -29,27 +29,15 @@ function delete_localtimer(id, local_check) {
       }
     location.reload()
   }
-
-  else {
-    window.location.href = "{{ url_for('delete_timer', id='pass_id') }}".replace('pass_id', id)
-  }
 }
 
-// passing in the dbTimers, localStorage timers, merge and sort
+// passing in the localStorage timers and sort
 
-var dbTimers = {{ timers | tojson }}
-console.log(dbTimers)
 var localTimers = JSON.parse(window.localStorage.getItem('localTimers')) || [];
-console.log(localTimers)
-
-// merging timers stored in the database and local storage
-combinedTimers = localTimers.concat(dbTimers)
 
 // removing null objects before sorting the timers
-combinedTimers = combinedTimers.filter((obj) => obj )
-combinedTimers.sort(asc);
-console.log(combinedTimers)
-
+localTimers = localTimers.filter((obj) => obj )
+localTimers.sort(asc);
 
 // passing local storage data
 
@@ -94,7 +82,7 @@ function timerTemplate(timer) {
 }
 
 document.getElementById("local_timer_js").innerHTML = `
-  ${combinedTimers.map(timerTemplate).join("")}
+  ${localTimers.map(timerTemplate).join("")}
 `;
 
 </script>
