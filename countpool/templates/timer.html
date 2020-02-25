@@ -27,7 +27,7 @@ function delete_localtimer(id, local_check) {
       if (localTimers.every(element => element === null)) {
         localStorage.removeItem("localTimers")
       }
-    location.reload()
+    document.location.href="/";
   }
 }
 
@@ -35,9 +35,11 @@ function delete_localtimer(id, local_check) {
 
 var localTimers = JSON.parse(window.localStorage.getItem('localTimers')) || [];
 
+var combinedTimers = localTimers
+
 // removing null objects before sorting the timers
-localTimers = localTimers.filter((obj) => obj )
-localTimers.sort(asc);
+combinedTimers = combinedTimers.filter((obj) => obj )
+combinedTimers.sort(asc);
 
 // passing local storage data
 
@@ -82,7 +84,7 @@ function timerTemplate(timer) {
 }
 
 document.getElementById("local_timer_js").innerHTML = `
-  ${localTimers.map(timerTemplate).join("")}
+  ${combinedTimers.map(timerTemplate).join("")}
 `;
 
 </script>
