@@ -53,6 +53,11 @@ function submit_localtimer () {
 
   if (local_title && local_date) {
 
+    // used to get data for the date created
+    var day = new Date().getDate()
+    var mon = new Date().getMonth() + 1
+    var year = new Date().getFullYear()
+
 
     var form_timer = {
     "title": local_title,
@@ -60,6 +65,7 @@ function submit_localtimer () {
     "id": "local_"+localTimers.length,
     "image": "default-2.jpg",
     "local_check" : "True",
+    "date_created" : year + "-" + mon + "-" + day,
     }
 
     append_timer(form_timer)
