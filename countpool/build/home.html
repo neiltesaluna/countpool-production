@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+  <!-- Static stylesheet -->
+  <link rel="stylesheet" href="/static/main.css">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="/static/favicon/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+
+  <title>countpool</title>
+</head>
+
+<body>
+
+  <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">
+      <img src="/static/favicon/favicon-32x32.png" width="30" height="30" class="d-inline-block align-top" alt="">
+    countpool
+    </a>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarText">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="modal" data-target="#local_newtimeModal">New Timer</a>
+        </li>
+      </ul>
+    </nav>
+
+
+  
+
+<div class="container">
+
+  <script>
+
+  function setTimer(end_date, timer_id) {
+
+    // count per second
+    var x = setInterval(function() {
+
+      // count_diff between
+      var count_diff = new Date(end_date).getTime() - new Date().getTime();;
+
+      // Time calculations for days, hours, minutes and seconds
+      var days = Math.floor(count_diff / (1000 * 60 * 60 * 24));
+      var hours = Math.floor((count_diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      var minutes = Math.floor((count_diff % (1000 * 60 * 60)) / (1000 * 60));
+      var seconds = Math.floor((count_diff % (1000 * 60)) / 1000);
+
+      // result for html
+      document.getElementById(timer_id).innerHTML = days + "d " + hours + "h "
+      + minutes + "m " + seconds + "s ";
+
+      // when timer reaches 0
+      if (count_diff < 0) {
+        clearInterval(x);
+        document.getElementById(timer_id).innerHTML = "count finished on "+end_date;
+      }
+    }, 1000);
+  }
+
+</script>
+  <!-- Modal -->
+<div class="modal fade" id="local_newtimeModal" tabindex="-1" role="dialog" aria-labelledby="local_newtimeModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">New Timer</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <form id="form_localtimer" action="#">
+
+        <div class="form-group">
+          <label class="form-control-label">Timer</label>
+          <input id=local_title class="form-control form-control-lg" type="text" required>
+        </div>
+
+        <div id="form_localtimer" class="form-group">
+          <label class="form-control-label">Date</label>
+          <input id=local_date class="form-control form-control-lg" type="date" required>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
+          <input class="btn btn-primary" type="submit" value="New Timer">
+        </div>
+
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+
+var localTimers = JSON.parse(window.localStorage.getItem('localTimers')) || [];
+
+var local_titledata = document.getElementById("local_title");
+var local_datedata = document.getElementById("local_date");
+
+
+// creating a new timer on form completion
+document.getElementById("form_localtimer").onsubmit = function() {
+  submit_localtimer()
+};
+
+function submit_localtimer () {
+  var local_title = local_titledata.value;
+  var local_date = local_datedata.value;
+
+  if (local_title && local_date) {
+
+
+    var form_timer = {
+    "title": local_title,
+    "goal": local_date,
+    "id": "local_"+localTimers.length,
+    "image": "default-2.jpg",
+    "local_check" : "True",
+    }
+
+    append_timer(form_timer)
+
+  }
+  location.reload()
+
+};
+
+// appending a new timer
+
+function append_timer(new_timer) {
+
+
+  localTimers.push(new_timer);
+  localStorage.setItem('localTimers', JSON.stringify(localTimers));
+
+}
+
+</script>
+  <div id="local_timer_js"</div>
+
+
+<script>
+
+
+// used to sort the timers by date
+
+function asc(a, b) {
+
+  let asc = 0;
+  if (a.goal > b.goal) {
+    asc = 1;
+  } else if (a.goal < b.goal) {
+    asc = -1;
+  }
+  return asc;
+}
+
+// used to delete the local timer
+
+function delete_localtimer(id, local_check) {
+  if (local_check === "True") {
+    var [_, id] = id.split('local_');
+    delete localTimers[id]
+    localStorage.setItem('localTimers', JSON.stringify(localTimers));
+      if (localTimers.every(element => element === null)) {
+        localStorage.removeItem("localTimers")
+      }
+    location.reload()
+  }
+}
+
+// passing in the localStorage timers and sort
+
+var localTimers = JSON.parse(window.localStorage.getItem('localTimers')) || [];
+
+// removing null objects before sorting the timers
+localTimers = localTimers.filter((obj) => obj )
+localTimers.sort(asc);
+
+// passing local storage data
+
+function timerTemplate(timer) {
+
+  if (timer){
+    setTimer(timer.goal, timer.id);
+
+    return `
+    <div class="jumbotron clickable" data-toggle="modal" data-target="#Modal-${timer.id}">
+      <div class="text-black text-center py-5 px-4">
+        <h1 class="display-1 title-text"><strong>${timer.title}</strong></h1>
+        <p class="lead timer-text"id='${timer.id}'></p>
+      </div>
+    </div>
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="Modal-${timer.id}" tabindex="-1" role="dialog" aria-labelledby="Modal-${timer.id}" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">${timer.title}</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="mx-auto">
+            <img src="static/bg-image/${timer.image}" class="img-fluid" alt="">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
+            <button onclick="delete_localtimer('${timer.id}','${timer.local_check}')" class="btn btn-danger">delete</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    `
+  }
+;
+
+}
+
+document.getElementById("local_timer_js").innerHTML = `
+  ${localTimers.map(timerTemplate).join("")}
+`;
+
+</script>
+
+</div>
+
+
+
+
+
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+</body>
+
+</html>
