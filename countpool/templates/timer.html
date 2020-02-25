@@ -66,7 +66,7 @@ function timerTemplate(timer) {
             </button>
           </div>
           <div class="mx-auto">
-            <img src="{{ url_for('static', filename='bg-image/') }}${timer.image}" class="img-fluid" alt="">
+            <img src="static/bg-image/${timer.image}" class="img-fluid" alt="">
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>

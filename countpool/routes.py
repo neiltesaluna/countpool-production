@@ -2,8 +2,8 @@ from countpool import app
 from flask import render_template, url_for
 
 
-@app.route("/")
-@app.route("/home")
+@app.route("/.html")
+@app.route("/home.html")
 def home():
 
     return render_template("home.html")
