@@ -29,3 +29,8 @@
 .modal-dialog {
   max-width: 378px
 }
+
+.img_select {
+  padding: 0.3rem;
+  max-width: 187px;
+}

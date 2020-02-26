@@ -22,6 +22,11 @@
           <input id=local_date class="form-control form-control-lg" type="date" required>
         </div>
 
+        <div class="form-group" data-toggle="modal" data-target="#imgModal">
+          <label class="form-control-label">Image</label>
+          <input id=img_name class="form-control form-control-lg" type="text" required readonly>
+        </div>
+
         <div class="modal-footer">
           <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
           <input class="btn btn-primary" type="submit" value="New Timer">
@@ -34,12 +39,33 @@
   </div>
 </div>
 
+<!-- Image Modal -->
+<div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-labelledby="imgModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="row mx-auto">
+        <input type="image" name="default-1.jpg" class="img_select" src="static/bg-image/default-1.jpg">
+        <input type="image" name="default-2.jpg" class="img_select" src="static/bg-image/default-2.jpg">
+        <input type="image" name="default-3.jpg" class="img_select" src="static/bg-image/default-3.jpg">
+        <input type="image" name="default-4.jpg" class="img_select" src="static/bg-image/default-4.jpg">
+      </div>
+    </div>
+  </div>
+</div>
+
 <script>
+
+// used to select image on form
+$(".img_select").click(function(){
+    $("#img_name").val($(this).attr('name'));
+    $('#imgModal').modal('hide');
+})
 
 var localTimers = JSON.parse(window.localStorage.getItem('localTimers')) || [];
 
 var local_titledata = document.getElementById("local_title");
 var local_datedata = document.getElementById("local_date");
+var local_imgdata = document.getElementById("img_name");
 
 
 // creating a new timer on form completion
@@ -50,6 +76,7 @@ document.getElementById("form_localtimer").onsubmit = function() {
 function submit_localtimer () {
   var local_title = local_titledata.value;
   var local_date = local_datedata.value;
+  var img_name = local_imgdata.value;
 
   if (local_title && local_date) {
 
@@ -63,7 +90,7 @@ function submit_localtimer () {
     "title": local_title,
     "goal": local_date,
     "id": "local_"+localTimers.length,
-    "image": "default-2.jpg",
+    "image": img_name,
     "local_check" : "True",
     "date_created" : year + "-" + mon + "-" + day,
     }
