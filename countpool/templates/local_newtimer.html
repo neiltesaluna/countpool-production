@@ -85,6 +85,7 @@ function submit_localtimer () {
     var mon = new Date().getMonth() + 1
     var year = new Date().getFullYear()
 
+    if (mon < 10) { mon = '0' + mon; }
 
     var form_timer = {
     "title": local_title,
