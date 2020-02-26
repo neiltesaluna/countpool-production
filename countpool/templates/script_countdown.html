@@ -6,11 +6,11 @@
     var timer_countdown = setInterval(function() {
 
       var current_date = new Date().getTime()
-      end_date = new Date(end_date).getTime()
-      date_created = new Date(date_created).getTime()
+      end_date_ms = new Date(end_date).getTime()
+      date_created_ms = new Date(date_created).getTime()
 
       // count_diff between
-      var count_diff = end_date - current_date;
+      var count_diff = end_date_ms - current_date_ms;
 
 
       // Time calculations for days, hours, minutes and seconds
@@ -25,7 +25,7 @@
 
 
       // percentage calculation to adjust width of the bootstrap bar
-      date_percent = ((current_date - end_date) / (date_created - end_date)) * 100
+      date_percent = ((current_date - end_date_ms) / (date_created_ms - end_date_ms)) * 100
       $('#bar_' + timer_id).css('width', date_percent+'%');
 
 
