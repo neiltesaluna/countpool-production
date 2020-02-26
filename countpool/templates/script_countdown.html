@@ -28,6 +28,22 @@
       date_percent = ((current_date - end_date) / (date_created - end_date)) * 100
       $('#bar_' + timer_id).css('width', date_percent+'%');
 
+
+      // changing the colour of the bar based on percentage
+      if (date_percent >= 90) {
+        $('#bar_' + timer_id).addClass("bg-danger");
+      }
+      else if (date_percent >= 60 && date_percent < 90) {
+        $('#bar_' + timer_id).removeClass("bg-danger").addClass("bg-warning");
+      }
+      else if (date_percent >= 30 && date_percent < 60) {
+        $('#bar_' + timer_id).removeClass("bg-warning").addClass("bg-info");
+      }
+      else {
+        $('#bar_' + timer_id).removeClass("bg-info").addClass("bg-success");
+      }
+
+
       // when timer reaches 0
       if (count_diff < 0) {
         clearInterval(timer_countdown);
