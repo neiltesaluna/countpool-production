@@ -30,9 +30,9 @@
   max-width: 378px;
 }
 
-.img_select {
-  max-width: 186px;
-  max-height: 139px;
+.img_select !important{
+  max-width: 184px;
+  max-height: 137px;
 }
 
 .image_box {
