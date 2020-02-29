@@ -30,7 +30,7 @@
   max-width: 378px;
 }
 
-.img_select !important{
+.img_select {
   max-width: 184px;
   max-height: 137px;
 }
@@ -39,5 +39,4 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
-  max-width: 378px;
 }
