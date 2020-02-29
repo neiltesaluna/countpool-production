@@ -31,13 +31,13 @@
 }
 
 .img_select {
-  max-width: 187px;
-  max-height: auto;
+  max-width: 186px;
+  max-height: 139px;
 }
 
 .image_box {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: space-around;
   max-width: 378px;
 }
