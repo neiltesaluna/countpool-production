@@ -19,18 +19,23 @@
 }
 
 .title-text {
-  font-size:10vw
+  font-size: 10vw;
 }
 
 .timer-text {
-  font-size:4vw
+  font-size: 4vw;
 }
 
 .modal-dialog {
-  max-width: 378px
+  max-width: 378px;
 }
 
 .img_select {
   padding: 0.3rem;
   max-width: 187px;
+}
+
+.image_box {
+  display: flex;
+  flex-wrap: wrap;
 }
