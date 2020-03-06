@@ -54,9 +54,9 @@ function timerTemplate(timer) {
         <h1 class="display-1 title-text"><strong>${timer.title}</strong></h1>
         <div class="lead timer-text"id='${timer.id}'></div>
         <div class="timer-inline">
+          <div class="lead timer-text">created on ${timer.date_created}</div>
           <div class="lead timer-text"id='minsec_${timer.id}'></div>
           <div class="lead milsec-text"id='milsec_${timer.id}'></div>
-          <p class="lead timer-text">created on ${timer.date_created}</p>
         </div>
       </div>
     </div>
