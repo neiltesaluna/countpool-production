@@ -1,13 +1,12 @@
 <script>
 
-  function setTimer(end_date, timer_id, date_created) {
+  function setTimer(end_date, timer_id) {
 
     // count per second
     var timer_countdown = setInterval(function() {
 
       var current_date = new Date().getTime()
       var end_date_ms = new Date(end_date).getTime()
-      var date_created_ms = new Date(date_created).getTime()
 
       // count_diff between
       var count_diff = end_date_ms - current_date;
@@ -51,27 +50,6 @@
       document.getElementById(timer_id).innerHTML = days_text + hr_text;
       document.getElementById("minsec_"+timer_id).innerHTML = minutes + " m " + seconds + " s ";
       document.getElementById("milsec_"+timer_id).innerHTML = m_seconds;
-
-
-
-      // percentage calculation to adjust width of the bootstrap bar
-      date_percent = ((current_date - end_date_ms) / (date_created_ms - end_date_ms)) * 100
-      $('#bar_' + timer_id).css('width', date_percent+'%');
-
-
-      // changing the colour of the bar based on percentage
-      if (date_percent >= 90) {
-        $('#bar_' + timer_id).addClass("bg-danger");
-      }
-      else if (date_percent >= 60 && date_percent < 90) {
-        $('#bar_' + timer_id).removeClass("bg-danger").addClass("bg-warning");
-      }
-      else if (date_percent >= 30 && date_percent < 60) {
-        $('#bar_' + timer_id).removeClass("bg-warning").addClass("bg-info");
-      }
-      else {
-        $('#bar_' + timer_id).removeClass("bg-info").addClass("bg-success");
-      }
 
 
       // when timer reaches 0

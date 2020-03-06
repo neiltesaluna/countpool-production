@@ -46,7 +46,7 @@ combinedTimers.sort(asc);
 function timerTemplate(timer) {
 
   if (timer){
-    setTimer(timer.goal, timer.id, timer.date_created);
+    setTimer(timer.goal, timer.id);
 
     return `
     <div class="jumbotron clickable" data-toggle="modal" data-target="#Modal-${timer.id}">
@@ -56,11 +56,6 @@ function timerTemplate(timer) {
         <div class="timer-inline">
           <div class="lead timer-text"id='minsec_${timer.id}'></div>
           <div class="lead milsec-text"id='milsec_${timer.id}'></div>
-        </div>
-        <div class="progress">
-          <div id='bar_${timer.id}'role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
-            <span class="sr-only"></span>
-          </div>
         </div>
       </div>
     </div>
