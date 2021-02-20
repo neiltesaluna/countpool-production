@@ -25,6 +25,19 @@
   cursor: pointer;
 }
 
+.timer-inline {
+  display: flex;
+  justify-content: center;
+}
+
+.milsec-text {
+  font-size: 2vw;
+}
+@media screen and (min-width: 1200px) {
+  .milsec-text {
+    font-size: 10px;
+  }
+
 .title-text {
   font-size:10vw;
 }
