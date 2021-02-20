@@ -12,6 +12,13 @@
 
 .jumbotron {
   background-color: #fff;
+  margin: auto;
+}
+@media screen and (min-width: 1200px) {
+  .jumbotron{
+    max-width: 866px;
+    max-height: 518px;
+  }
 }
 
 .clickable {
@@ -19,11 +26,21 @@
 }
 
 .title-text {
-  font-size: 10vw;
+  font-size:10vw;
+}
+@media screen and (min-width: 1200px) {
+  .title-text {
+    font-size: 50px;
+  }
 }
 
 .timer-text {
-  font-size: 4vw;
+  font-size:4vw;
+}
+@media screen and (min-width: 1200px) {
+  .timer-text {
+    font-size: 20px;
+  }
 }
 
 .modal-dialog {
@@ -31,23 +48,11 @@
 }
 
 .img_select {
-  max-width: 177px;
-  max-height: 130px;
-  margin: 1.5px;
+  padding: 0.3rem;
+  max-width: 187px;
 }
 
 .image_box {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
-}
-
-.timer-inline {
-  display: flex;
-  justify-content: center;
-}
-
-.milsec-text {
-  font-size: 2vw;
-  min-width: 4vw;
 }
