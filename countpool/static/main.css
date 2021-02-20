@@ -33,7 +33,7 @@
 .milsec-text {
   font-size: 2vw;
 }
-@media screen and (min-width: 1200px) {
+@media only screen and (min-width: 1200px) {
   .milsec-text {
     font-size: 10px;
   }
@@ -41,7 +41,7 @@
 .title-text {
   font-size:10vw;
 }
-@media screen and (min-width: 1200px) {
+@media only screen and (min-width: 1200px) {
   .title-text {
     font-size: 50px;
   }
@@ -50,7 +50,7 @@
 .timer-text {
   font-size:4vw;
 }
-@media screen and (min-width: 1200px) {
+@media only screen and (min-width: 1200px) {
   .timer-text {
     font-size: 20px;
   }
