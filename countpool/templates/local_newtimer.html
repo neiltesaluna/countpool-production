@@ -10,7 +10,7 @@
       </div>
       <div class="modal-body">
 
-        <form id="form_localtimer" action="#">
+        <form id="form_localtimer">
 
         <div class="form-group">
           <label class="form-control-label">Timer</label>
@@ -39,6 +39,10 @@
   </div>
 </div>
 
+
+
+
+
 <!-- Image Modal -->
 <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-labelledby="imgModalLabel">
   <div class="modal-dialog" role="document">
@@ -53,9 +57,9 @@
   </div>
 </div>
 
+
 <script>
 
-// used to select image on form
 $(".img_select").click(function(){
     $("#img_name").val($(this).attr('name'));
     $('#imgModal').modal('hide');
@@ -71,6 +75,7 @@ var local_imgdata = document.getElementById("img_name");
 // creating a new timer on form completion
 document.getElementById("form_localtimer").onsubmit = function() {
   submit_localtimer()
+  window.location.reload();
 };
 
 function submit_localtimer () {
@@ -78,16 +83,14 @@ function submit_localtimer () {
   var local_date = local_datedata.value;
   var img_name = local_imgdata.value;
 
+
   if (local_title && local_date) {
 
-    // used to get data for the date created
     var day = new Date().getDate()
     var mon = new Date().getMonth() + 1
     var year = new Date().getFullYear()
 
     if (mon < 10) { mon = '0' + mon; }
-    if (day < 10) { day = '0' + day; }
-
 
     var form_timer = {
     "title": local_title,
@@ -95,23 +98,17 @@ function submit_localtimer () {
     "id": "local_"+localTimers.length,
     "image": img_name,
     "local_check" : "True",
-    "date_created" : year + "-" + mon + "-" + day,
+    "date_created" : year + "-" + mon + "-" + day
     }
-
     append_timer(form_timer)
-
   }
-  document.location.href="/";
 };
 
 // appending a new timer
 
 function append_timer(new_timer) {
-
-
   localTimers.push(new_timer);
   localStorage.setItem('localTimers', JSON.stringify(localTimers));
-
 }
 
 </script>
